@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Sprites/outdoors.tres" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4.81593, 5.68467 )
+
+[node name="ent_barrel" type="KinematicBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.5, -2.2 )
+texture = ExtResource( 1 )
+vframes = 32
+hframes = 57
+frame = 23
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+

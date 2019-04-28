@@ -1,0 +1,118 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Entities/ent_enemy/ent_enemy_basic.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/atlas_slime.tres" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "deathLeft"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14, 15 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "deathRight"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "slideLeft"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "slideRight"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "stand"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 50, 25 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 55, 30 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="enemy_basic" type="KinematicBody2D" parent="."]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="enemy_basic"]
+position = Vector2( 0, -64 )
+texture = ExtResource( 2 )
+vframes = 4
+hframes = 4
+frame = 2
+
+[node name="anim_player" type="AnimationPlayer" parent="enemy_basic/Sprite"]
+autoplay = "stand"
+anims/deathLeft = SubResource( 1 )
+anims/deathRight = SubResource( 2 )
+anims/slideLeft = SubResource( 3 )
+anims/slideRight = SubResource( 4 )
+anims/stand = SubResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_basic"]
+shape = SubResource( 6 )
+
+[node name="hitbox" type="Area2D" parent="enemy_basic"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_basic/hitbox"]
+shape = SubResource( 7 )
+
